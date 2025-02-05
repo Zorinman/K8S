@@ -56,14 +56,14 @@ $ docker-compose ps
 由于客户端docker默认采用的是Https协议，而我们在模板里使用的是http协议，  
 因此要在**推送镜像的主机**上首先作如下**1.2**步的设置，否则会报错  
 
- 1.编辑docker配置文件
-` vim /etc/docker/daemon.json`
+ **1.编辑docker配置文件**  
+` vim /etc/docker/daemon.json`  
 添加以下内容（这里是我自己的harbor主机ip）
 ```{
   "insecure-registries": ["192.168.219.129"]
 }
 ```
- 2.重新加载、启动docker
+ **2.重新加载、启动docker**
 `systemctl daemon-reload
 systemctl restart docker`
 
@@ -72,9 +72,9 @@ systemctl restart docker`
 ------------------------------------------------------------
 **接下来就可以开始正式推送镜像**
 
-  3.推送镜像主机的docker连接远程仓库
-   `docker login 192.168.219.129`
-（如果上述操作后连接时仍然报错可以尝试以下操作：
+  **3.推送镜像主机的docker连接远程仓库**  
+   `docker login 192.168.219.129`  
+  （如果上述操作后连接时仍然报错可以尝试以下操作（①.②.③分别单独尝试）：  
  ①在 vim /etc/docker/daemon.json 中的ip地址后面加入镜像仓库的端口，如192.168.219.129:80  
  ②在docker login 192.168.219.129时加上端口如docker login 192.168.219.129:80  
  ③vim /etc/docker/daemon.json把里面添加的ip内容清空，改为在docker.service文件中配置
@@ -94,28 +94,28 @@ systemctl restart docker`
   $systemctl daemon-reload
   $systemctl restart docker
   ``` 
-）  
-  4.给待推送的镜像打标记，打标记命令格式如下：
-  `docker tag SOURCE_IMAGE[:TAG] 192.168.219.129/library/REPOSITORY[:TAG]`该命令可在harbor仓库查看
-  SOURCE_IMAGE[:TAG]表示当前docker已存在的某个版本的镜像名称
-  library表示的是harbor里头的某个项目名称，表示镜像推送给这个项目
-  REPOSITORY[:TAG]表示的是推送到仓库后你想以什么名称保存,可以随意设置
-  **例：**
-  如果我要推送一个 REPOSITORY 为mysql,TAG为5.7的镜像
+）
+
+  **4.给待推送的镜像打标记，打标记命令格式如下：**  
+  `docker tag SOURCE_IMAGE[:TAG] 192.168.219.129/library/REPOSITORY[:TAG]`该命令可在harbor仓库查看  
+  SOURCE_IMAGE[:TAG]表示当前docker已存在的某个版本的镜像名称  
+  library表示的是harbor里头的某个项目名称，表示镜像推送给这个项目  
+  REPOSITORY[:TAG]表示的是推送到仓库后你想以什么名称保存,可以随意设置  
+  **例：**  
+  如果我要推送一个 REPOSITORY 为mysql,TAG为5.7的镜像  
   则可以为`docker tag mysql:5.7 192.168.219.129/library/This is mysql:5.7`
     
- 5.推送完成后断开连接
+ **5.推送完成后断开连接**
  `docker logout`
  
 # 8.从仓库拉取镜像
 适用场景同推送镜像
 1.2.3步同推送镜像，
 
-4.在浏览器登录harbor然后在harbor仓库选择要拉取的镜像，直接复制拉取镜像的命令即可
-![image](https://github.com/user-attachments/assets/08298403-bc12-49e5-9862-b7b26611c7e4)
+**4.在浏览器登录harbor然后在harbor仓库选择要拉取的镜像，直接复制拉取镜像的命令即可**
+![img.png](img.png)
 
-
-5.粘贴命令至需要拉取镜像的主机即可开始拉取
+**5.粘贴命令至需要拉取镜像的主机即可开始拉取**
 
 # 9.关于harbor的补充
 如果以后需要修改harbor.yml文件，那么先停止harbor`docker-compose down`，再去修改harbor.yml文件，然后重新启动部署 `./install.sh`
@@ -123,6 +123,5 @@ systemctl restart docker`
 正常启动harbor启动：`docker-compose up -d`
 
 未修改配置文件，重启Harbor命令：`docker-compose start | stop | restart`
-
-
+————————————————
 
