@@ -113,7 +113,8 @@ systemctl restart docker`
 1.2.3步同推送镜像，
 
 **4.在浏览器登录harbor然后在harbor仓库选择要拉取的镜像，直接复制拉取镜像的命令即可**
-![img.png](img.png)
+![image](https://github.com/user-attachments/assets/39fd6107-ad60-4eaf-8fc8-55c634f97b00)
+
 
 **5.粘贴命令至需要拉取镜像的主机即可开始拉取**
 
