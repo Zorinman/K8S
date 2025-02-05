@@ -94,7 +94,7 @@ systemctl restart docker`
   $systemctl daemon-reload
   $systemctl restart docker
   ``` 
-）
+）  
   4.给待推送的镜像打标记，打标记命令格式如下：
   `docker tag SOURCE_IMAGE[:TAG] 192.168.219.129/library/REPOSITORY[:TAG]`该命令可在harbor仓库查看
   SOURCE_IMAGE[:TAG]表示当前docker已存在的某个版本的镜像名称
