@@ -47,6 +47,6 @@ $ cd /opt/harbor && mv harbor.yml.tmpl harbor.yml && vim harbor.yml
 $ docker-compose ps
 
 ```
-# 6.浏览器访问hostname:80访问harbor管理端口  我这里是http://192.168.219.129:80
+# 6.浏览器访问hostname:80访问harbor管理端口  我这里是 192.168.219.129:80
  默认账户为admin
  默认密码为Harbor12345
