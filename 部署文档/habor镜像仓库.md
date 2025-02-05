@@ -50,3 +50,79 @@ $ docker-compose ps
 # 6.浏览器访问hostname:80访问harbor管理端口  我这里是 192.168.219.129:80
  默认账户为admin
  默认密码为Harbor12345
+
+# 7推送镜像至harbor仓库
+适用场景：相同系统（这里是centos）下A主机镜像推到Harbor主机仓库，或者Harbor主机自己推送镜像到仓库
+由于客户端docker默认采用的是Https协议，而我们在模板里使用的是http协议，  
+因此要在**推送镜像的主机**上首先作如下**1.2**步的设置，否则会报错  
+
+ 1.编辑docker配置文件
+` vim /etc/docker/daemon.json`
+添加以下内容（这里是我自己的harbor主机ip）
+```{
+  "insecure-registries": ["192.168.219.129"]
+}
+```
+ 2.重新加载、启动docker
+`systemctl daemon-reload
+systemctl restart docker`
+
+ 如果在harbor主机上推送则重启docker后还要再次启动harbor
+`docker-compose up -d`
+------------------------------------------------------------
+**接下来就可以开始正式推送镜像**
+
+  3.推送镜像主机的docker连接远程仓库
+   `docker login 192.168.219.129`
+（如果上述操作后连接时仍然报错可以尝试以下操作：
+ ①在 vim /etc/docker/daemon.json 中的ip地址后面加入镜像仓库的端口，如192.168.219.129:80  
+ ②在docker login 192.168.219.129时加上端口如docker login 192.168.219.129:80  
+ ③vim /etc/docker/daemon.json把里面添加的ip内容清空，改为在docker.service文件中配置
+
+  ```
+  #查找docker.service所在位置 
+  $find / -name docker.service -type f
+  
+  #find: ‘/run/user/1000/gvfs’: Permission denied
+/usr/lib/systemd/system/docker.service
+  #编辑配置文件 
+  $vim /usr/lib/systemd/system/docker.service
+  #找到ExecStart= ，并将以下内容添加到后面
+  --insecure-registry=192.168.219.129
+  #保存退出
+  #重启docker服务
+  $systemctl daemon-reload
+  $systemctl restart docker
+  ``` 
+）
+  4.给待推送的镜像打标记，打标记命令格式如下：
+  `docker tag SOURCE_IMAGE[:TAG] 192.168.219.129/library/REPOSITORY[:TAG]`该命令可在harbor仓库查看
+  SOURCE_IMAGE[:TAG]表示当前docker已存在的某个版本的镜像名称
+  library表示的是harbor里头的某个项目名称，表示镜像推送给这个项目
+  REPOSITORY[:TAG]表示的是推送到仓库后你想以什么名称保存,可以随意设置
+  **例：**
+  如果我要推送一个 REPOSITORY 为mysql,TAG为5.7的镜像
+  则可以为`docker tag mysql:5.7 192.168.219.129/library/This is mysql:5.7`
+    
+ 5.推送完成后断开连接
+ `docker logout`
+ 
+# 8.从仓库拉取镜像
+适用场景同推送镜像
+1.2.3步同推送镜像，
+
+4.在浏览器登录harbor然后在harbor仓库选择要拉取的镜像，直接复制拉取镜像的命令即可
+![image](https://github.com/user-attachments/assets/08298403-bc12-49e5-9862-b7b26611c7e4)
+
+
+5.粘贴命令至需要拉取镜像的主机即可开始拉取
+
+# 9.关于harbor的补充
+如果以后需要修改harbor.yml文件，那么先停止harbor`docker-compose down`，再去修改harbor.yml文件，然后重新启动部署 `./install.sh`
+
+正常启动harbor启动：`docker-compose up -d`
+
+未修改配置文件，重启Harbor命令：`docker-compose start | stop | restart`
+
+
+
