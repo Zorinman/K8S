@@ -51,7 +51,7 @@ $ docker-compose ps
  默认账户为admin
  默认密码为Harbor12345
 
-# 7推送镜像至harbor仓库
+# 7.推送镜像至harbor仓库
 适用场景：相同系统（这里是centos）下A主机镜像推到Harbor主机仓库，或者Harbor主机自己推送镜像到仓库
 由于客户端docker默认采用的是Https协议，而我们在模板里使用的是http协议，  
 因此要在**推送镜像的主机**上首先作如下**1.2**步的设置，否则会报错  
