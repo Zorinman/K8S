@@ -1,6 +1,7 @@
 ## dashboard安装:
 https://blog.csdn.net/Dandelin/article/details/138296061
-
+获取token命令：  
+`kubectl -n kubernetes-dashboard create token admin-user`
 ## dashboard卸载:  
 因为是用helm安装的 所以用它来卸载    
 `helm list -n kubernetes-dashboard`  
@@ -34,5 +35,4 @@ https://blog.csdn.net/Dandelin/article/details/138296061
 `helm repo remove kubernetes-dashboard`  
 
 
-获取token：  
-`kubectl -n kubernetes-dashboard create token admin-user`
+
