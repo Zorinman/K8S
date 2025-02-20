@@ -1,0 +1,6 @@
+我的k8s使用的是calico网络插件
+我发现我的k8s dashboard网站无法访问
+
+# 1.使用命令查看Pod的ip以及其部署的节点
+kubectl get pods -A -o wide
+发现dashboard的节点 以及calico网络插件都在正常运行
