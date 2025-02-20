@@ -1,5 +1,5 @@
 ## dashboard安装:
-https://blog.csdn.net/Dandelin/article/details/138296061
+https://blog.csdn.net/Dandelin/article/details/138296061  
 获取token命令：  
 `kubectl -n kubernetes-dashboard create token admin-user`
 ## dashboard卸载:  
