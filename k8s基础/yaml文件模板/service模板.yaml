@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Service
+matadata:                                #元数据
+  name: string                           #service的名称
+  namespace: string                      #命名空间  
+  labels:                                #自定义标签属性列表
+    - name: string
+  annotations:                           #自定义注解属性列表  
+    - name: string
+spec:                                    #详细描述
+  selector: []                           #label selector配置，将选择具有label标签的Pod作为管理 
+                                         #范围
+  type: string                           #service的类型，指定service的访问方式，默认为 
+                                         #clusterIp
+  clusterIP: string                      #虚拟服务地址      
+  sessionAffinity: string                #是否支持session
+  ports:                                 #service需要暴露的端口列表
+  - name: string                         #端口名称
+    protocol: string                     #端口协议，支持TCP和UDP，默认TCP
+    port: int                            #服务监听的端口号
+    targetPort: int                      #需要转发到后端Pod的端口号
+    nodePort: int                        #当type = NodePort时，指定映射到物理机的端口号
+  status:                                #当spce.type=LoadBalancer时，设置外部负载均衡器的地址
+    loadBalancer:                        #外部负载均衡器    
+      ingress:                           #外部负载均衡器 
+        ip: string                       #外部负载均衡器的Ip地址值
+        hostname: string                 #外部负载均衡器的主机名
+
+
+
+        #例
+        #这里使用yaml文件来创建NodePort类型的Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: kube-node-service
+  labels:
+    name: kube-node-service
+spec:
+  type: NodePort      #这里代表是NodePort类型的
+  ports:
+  - port: 80          #这里的端口和clusterIP(10.97.114.36)对应，即10.97.114.36:80,供内部访问。
+    targetPort: 8081  #端口一定要和container暴露出来的端口对应，nodejs暴露出来的端口是8081，所以这里也应是8081
+    protocol: TCP
+    nodePort: 32143   # 所有的节点都会开放此端口，此端口供外部调用。
+  selector:
+    app: web          #这里选择器一定要选择容器的标签，之前写name:kube-node是错的。
+
+
+   # 创建loadBalancer类型的service
+   
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: kube-node-service-lb
+      labels:
+        name: kube-node-service-lb
+    spec:
+      type: LoadBalancer
+      clusterIP: 10.99.201.198
+      ports:
+      - port: 80
+        targetPort: 8081
+        protocol: TCP
+        nodePort: 32145
+      selector:
+        app: web
+    status:
+      loadBalancer:
+        ingress:
+        - ip: 192.168.174.127    #这里是云服务商提供的负载匀衡器的IP地址
