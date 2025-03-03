@@ -11,6 +11,7 @@ kubectl delete pod mysql-dep-74d9b967f6-rztck --force --grace-period=0
 ![image](https://github.com/user-attachments/assets/83224734-3255-4bc1-b5cd-af5518d869e3)
 ![image](https://github.com/user-attachments/assets/b95198c5-2c60-4cc4-b614-bc783d88af2a)
 
-![image](https://github.com/user-attachments/assets/f3d85c53-568e-48f7-86a9-8d81096e2782)
+![image](https://github.com/user-attachments/assets/2941f703-7156-4d0e-9f24-34bf6a1d6d62)
+
 
 
