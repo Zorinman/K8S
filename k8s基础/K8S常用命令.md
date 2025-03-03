@@ -1,5 +1,5 @@
 ![image](https://github.com/user-attachments/assets/6b731fee-a13c-457b-bc52-cf70caef575b)  
-![image](https://github.com/user-attachments/assets/2941f703-7156-4d0e-9f24-34bf6a1d6d62)
+![image](https://github.com/user-attachments/assets/2941f703-7156-4d0e-9f24-34bf6a1d6d62)  
 如果pod处于Terminating无法删除可以强制删除：  
 强制删除：  
 kubectl delete pod <pod_name> --force --grace-period=0
