@@ -1,6 +1,7 @@
 ![image](https://github.com/user-attachments/assets/6b731fee-a13c-457b-bc52-cf70caef575b)  
 ![image](https://github.com/user-attachments/assets/c489877b-a45b-4917-ab08-076410039289)
-![image](https://github.com/user-attachments/assets/ee33dc7d-aba3-4e63-8d0b-495e9767e87d)
+![image](https://github.com/user-attachments/assets/5e31a056-978d-432a-b2ec-f9eb1fba7075)
+
 
 如果pod处于Terminating无法删除可以强制删除：  
 强制删除：  
