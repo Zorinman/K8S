@@ -1,3 +1,4 @@
+查看某个命名空间下的所有资源：`kubectl get all -n <namespace>`
 ![image](https://github.com/user-attachments/assets/6b731fee-a13c-457b-bc52-cf70caef575b)  
 ![image](https://github.com/user-attachments/assets/c489877b-a45b-4917-ab08-076410039289)
 ![image](https://github.com/user-attachments/assets/5e31a056-978d-432a-b2ec-f9eb1fba7075)
