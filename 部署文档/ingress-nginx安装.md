@@ -1,6 +1,6 @@
 
 
-## 安装 ingress-nginx
+## 安装 ingress-nginx(这里使用helm包管理器安装）
 ### 1.[安装helm 自行查阅](helm安装.md)
 ### 2.添加ingress-nginx到helm仓库
 ```
