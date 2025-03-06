@@ -1,6 +1,19 @@
-查看某个命名空间下的所有资源：`kubectl get all -n <namespace>`
+**查看某个命名空间下的所有资源**：`kubectl get all -n <namespace>`
+
+查**看特定名称空间下的 服务**:`/pod/deploy：kubectl -n xxx get svc/pod/deploy`
+
+**使yaml文件生效**：`kubectl apply -f xxx.yaml` 
+
+**查看所有Pod以及它们所在的节点**：`kubectl get pods -o wide -A`  
+**详细查看pod里的内容（可以查看Pod内的容器）** `kubectl describe pods/podname`  
+
+**选择pod中的特定容器下执行命令**：`kubectl exec -it <pod-name> -c <container-name> -- <command>`
+
+**创建一个交互式终端会话连接到容器**：`kubectl exec -it my-pod -c container2 -- /bin/sh`
+
+**如果不指定容器-c 则表示直接在pod的默认容器执行**：`kubectl exec -it <pod-name> -- <command>`
+
 ![image](https://github.com/user-attachments/assets/6b731fee-a13c-457b-bc52-cf70caef575b)  
-![image](https://github.com/user-attachments/assets/c489877b-a45b-4917-ab08-076410039289)
 ![image](https://github.com/user-attachments/assets/5e31a056-978d-432a-b2ec-f9eb1fba7075)
 
 
