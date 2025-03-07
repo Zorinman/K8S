@@ -1,4 +1,5 @@
-
+`docker-compose up -d`以及 `docker-compose ps`等命令均需要在harbor的的安装目录下执行  
+如果一切正常运行但无法访问网页管理界面记得先关闭firewall防火墙
 # 1、下载安装包（Harbor 镜像使用 Docker-Compose 做编排）：
 
 Harbor 下载链接：https://github.com/goharbor/harbor/releases ,   我这里使用的是 harbor-offline-installer-v2.12.2.tgz；
