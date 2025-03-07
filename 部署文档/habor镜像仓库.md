@@ -1,3 +1,4 @@
+第一次部署好之后之后每次重启开机重启启动harbor即可 `docker-compose up -d`， `docker-compose ps`查看运行状态  
 `docker-compose up -d`以及 `docker-compose ps`等命令均需要在harbor的的安装目录下执行  
 如果一切正常运行但无法访问网页管理界面记得先关闭firewall防火墙
 ```
