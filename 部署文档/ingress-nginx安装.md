@@ -1,4 +1,27 @@
+问：k8s问什么创建service,deployment等资源时可以通过yaml文件直接创建，但是创建ingress资源时需要先安装ingress?
+答：
+```
+在 Kubernetes 中，创建 Deployment、Service 等资源时可以直接通过 YAML 文件创建，而创建 Ingress 资源需要先安装 Ingress 控制器
+因为service,deployment等资源属于k8s的核心功能,Kubernetes 控制平面（如 kube-controller-manager）内置了这些资源的控制器,Deployment 由 deployment-controller 管理，负责创建和管理 Pod。
+Service 由 kube-proxy 管理，负责实现服务发现和负载均衡。
 
+Ingress 是扩展功能,Kubernetes 核心组件中没有内置 Ingress 控制器，需要用户自行安装第三方实现
+Ingress 资源本身只是一个路由规则的声明,Ingress 资源需要由独立的 Ingress 控制器监听并实现具体的流量路由逻辑
+可以将 Kubernetes 的 Ingress 资源比作“路由规则说明书”，而 Ingress 控制器则是“实际执行路由的工程师”
+Ingress 控制器是一个独立的组件，负责以下任务：
+
+监听 Ingress 资源：实时监控集群中的 Ingress 对象变化。
+
+配置反向代理：根据 Ingress 规则动态配置负载均衡器（如 Nginx、Envoy 等）。
+
+处理外部流量：将外部请求路由到集群内部的 Service 或 Pod。
+
+Kubernetes 采用这种设计是为了保持核心功能的轻量化和灵活性：
+
+核心功能开箱即用：Deployment、Service 等是大多数应用的基础需求，因此由 Kubernetes 直接支持。
+
+扩展功能按需选择：不同的场景可能需要不同的 Ingress 实现（如云厂商的负载均衡器、自建 Nginx 等），因此 Kubernetes 将具体实现交给用户选择。
+```
 
 ## 安装 ingress-nginx(这里使用helm包管理器安装）
 ### 1.[安装helm 自行查阅](helm安装.md)
