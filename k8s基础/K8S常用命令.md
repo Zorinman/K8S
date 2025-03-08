@@ -1,3 +1,10 @@
+**查看configmap**：`kubectl get cm`
+
+**实时查看Pod的默认容器的日志**：`kubectl logs -f <pod名称>`
+
+**如果 Pod 中有多个容器，使用 -c 指定容器名称**：`kubectl logs -f <pod名称> -c <容器名称>`
+
+
 **查看某个命名空间下的所有资源**：`kubectl get all -n <namespace>`
 
 查**看特定名称空间下的 服务**:`/pod/deploy：kubectl -n xxx get svc/pod/deploy`
