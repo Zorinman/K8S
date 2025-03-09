@@ -1,6 +1,6 @@
 ![image](https://github.com/user-attachments/assets/479c94cd-7b5c-4c4b-880d-14a33659dc08)
 ```
-### 1. hostPath
+ 1. hostPath
 定义: hostPath 卷将主机节点上的文件或目录挂载到 Pod 中。
 
 用途: 通常用于访问主机上的特定文件或目录，如日志文件、配置文件等。
@@ -28,7 +28,7 @@ Pod 删除后，数据也会被清除。
 适合临时存储，不具备持久性。
 ```
 ```
-NFS (Network File System)
+3.NFS (Network File System)
 定义: NFS 卷将远程 NFS 服务器（例如专门用来做存储的服务器)的上的目录挂载到 Pod 中。
 
 用途: 用于需要持久化存储且跨node共享数据的场景。
