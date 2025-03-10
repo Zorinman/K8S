@@ -1,4 +1,6 @@
 [NFS的安装](https://github.com/Zorinman/K8S/blob/main/%E9%83%A8%E7%BD%B2%E6%96%87%E6%A1%A3/NFS%E5%AE%89%E8%A3%85.md)  
+
+
 ![image](https://github.com/user-attachments/assets/479c94cd-7b5c-4c4b-880d-14a33659dc08)
 ```
  1. hostPath
