@@ -34,4 +34,6 @@ Pod 会耗用节点资源，而 PVC 申领会耗用 PV 资源。Pod 可以请求
 ![img_7](https://github.com/user-attachments/assets/eaaa3d15-f2b8-49f0-85d5-6de47fc50b7b)
 
 
-[静态创建和动态创建PV和PVC并应用到Pod上的示例](https://github.com/Zorinman/K8S/blob/main/%E9%83%A8%E7%BD%B2%E6%96%87%E6%A1%A3/PV%2CPVC%E7%9A%84%E5%8A%A8%E6%80%81%E4%B8%8E%E9%9D%99%E6%80%81%E6%9E%84%E5%BB%BA.md)
+[静态创建和动态创建PV和PVC并应用到Pod上的示例](https://github.com/Zorinman/K8S/blob/main/%E9%83%A8%E7%BD%B2%E6%96%87%E6%A1%A3/PV%2CPVC%E7%9A%84%E5%8A%A8%E6%80%81%E4%B8%8E%E9%9D%99%E6%80%81%E6%9E%84%E5%BB%BA.md)  
+**PV和PVC中的accessModes:  **
+![image](https://github.com/user-attachments/assets/158b16bd-68a0-4b05-a6a2-d76571d74201)
