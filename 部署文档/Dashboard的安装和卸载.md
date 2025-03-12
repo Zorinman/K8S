@@ -17,5 +17,5 @@ helm会使用kubectl默认的KUBECONFIG配置，这里我们需要将KUBECONFIG�
 
 `helm upgrade --install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard --create-namespace --namespace kubernetes-dashboard`
 
-下面步骤按照
-[在K8s_K3s集群中安装与卸载Dashboard_k3s dashboard-CSDN博客.pdf](https://github.com/user-attachments/files/19214368/K8s_K3s.Dashboard_k3s.dashboard-CSDN.pdf)
+
+[后续步骤](https://github.com/Zorinman/K8S/blob/main/%E9%83%A8%E7%BD%B2%E6%96%87%E6%A1%A3/K8s_K3s.Dashboard_k3s.dashboard-CSDN.pdf)
