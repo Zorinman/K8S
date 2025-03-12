@@ -146,6 +146,11 @@ roleRef:
   kind: ClusterRole
   name: nfs-client-provisioner-runner
   apiGroup: rbac.authorization.k8s.io
+#Kubernetes 将资源按功能分类到不同的 API 组（API Groups） 核心资源（如 Pod、Service）属于空字符串的 API 组（apiGroup: ""）。
+
+#RBAC 资源（如 Role、ClusterRoleBinding）属于 rbac.authorization.k8s.io。
+
+#Deployment 资源属于 apps 组（apiGroup: apps）
 ---
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
