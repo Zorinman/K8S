@@ -102,3 +102,4 @@ kubectl wait \
 192.168.219.148 alertmanager.zorin.cn
 ```
 **6.通过浏览器访问上面对应域名即可(记得关梯子）**
+grafana的默认账号和密码都是admin
