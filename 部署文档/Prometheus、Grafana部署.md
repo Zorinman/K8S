@@ -1,7 +1,26 @@
 [ingress解释](https://github.com/Zorinman/K8S/blob/main/k8s%E5%9F%BA%E7%A1%80/%E6%9C%AF%E8%AF%AD%E8%A7%A3%E6%9E%90/Ingress.md)  
-下面prometheus-ingress.yaml关联的三个Service即使Type为ClusterIP也不影响外部访问，因为会通过ingress的控制器作为流量入口再从集群内发现对应Service
+
+**Prometheus、Grafana 和 Alertmanager 的关系  **
+Prometheus 负责监控和数据采集。  
+
+Grafana 负责数据可视化和仪表盘展示。  
+
+Alertmanager 负责告警管理和通知。  
+
+![image](https://github.com/user-attachments/assets/7b27a44e-63aa-4299-b5ba-e69e2bf1fc58)
+
+
+⬇Prometheus从K8S集群拉取监控数据，并存储在本地时间序列数据库中    
+			 
+⬇Grafana 从 Prometheus 获取监控数据，并通过仪表盘展示给用户    
+			
+⬇Prometheus 根据预定义的告警规则（如 CPU 使用率超过 80%）触发告警  
+			
+⬇Alertmanager 接收 Prometheus 触发的告警并通过配置的渠道发送通知给管理者（如邮箱等）
+
 
 --------
+下面prometheus-ingress.yaml关联的三个Service即使Type为ClusterIP也不影响外部访问，因为会通过ingress的控制器作为流量入口再从集群内发现对应Service
 ⭐⭐这里ingress-nginx控制器的Service的Type为ClusterIP外部也依然能够访问,这是因为在之前部署Ingress时在value.yaml文件中定义了hostNetwork: true
 ```
 当 ingress-nginx-controller 的 Pod 配置了 hostNetwork: true 时：
@@ -103,3 +122,11 @@ kubectl wait \
 ```
 **6.通过浏览器访问上面对应域名即可(记得关梯子）**  
 grafana的默认账号和密码都是admin
+
+在grafana配置DataSource使得可用从Prometheus获取数据 (第一次默认会配置好,后续添加Prometheus自行配置)  
+![image](https://github.com/user-attachments/assets/57baa4d1-bbce-4490-9830-c625c57a62d1)    
+在Dashboard里可用搜索相应资源的监控面板，如Pod,Node等  
+![image](https://github.com/user-attachments/assets/963f0c3f-3462-4f08-a972-adcf3be00aa6)
+
+
+
