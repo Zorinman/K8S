@@ -1,3 +1,4 @@
+Ingress是一种抽象概念，而ingress-nginx是其中一种实现
 问：k8s问什么创建service,deployment等资源时可以通过yaml文件直接创建，但是创建ingress资源时需要先安装ingress?
 答：
 ```
