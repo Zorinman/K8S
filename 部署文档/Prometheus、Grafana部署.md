@@ -95,7 +95,7 @@ kubectl wait \
 
 **5 在物理机以下目录配置host文件：C:\Windows\System32\drivers\etc**  
 配置host之后，浏览器访问相应域名就会解析到对应IP地址，访问流量从ingress进行集群  
-添加以下内容(192.168.219.148为部署ingress-nginx所在的节点查看ingress-nginx的pod可用查看)  
+添加以下内容(192.168.219.148为ingress-nginx所在的节点，可用通过ingress-nginx的pod查看)  
 ```commandline
 192.168.219.148 grafana.zorin.cn
 192.168.219.148 prometheus.zorin.cn
