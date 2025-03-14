@@ -61,7 +61,7 @@ hostNetwork: true
 
 dnsPolicy: ClusterFirstWithHostNet 
 
-#当 hostNetwork: true 时，默认的 DNS 策略（ClusterFirst）会失效，因为 Pod 会直接使用宿主机的 DNS 配置。
+#当 hostNetwork: true 时，默认的 DNS 策略（ClusterFirst）会失效，因为 Pod 会直接使用宿主机（pod部署的节点）的 DNS 配置。
 ClusterFirstWithHostNet 会强制 Pod 使用 Kubernetes 集群的 DNS 服务（如 CoreDNS），而不是宿主机的 DNS。
 
 
