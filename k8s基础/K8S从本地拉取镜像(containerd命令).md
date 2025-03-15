@@ -20,3 +20,13 @@
  验证镜像是否导入成功  
 ` sudo ctr -n=k8s.io images list`  
 应用yaml文件  
+
+
+containerd相关命令
+```command
+拉取镜像    sudo crictl pull <镜像名>
+查看镜像    sudo crictl images
+删除镜像    sudo crictl rmi <镜像名>
+```
+
+```
