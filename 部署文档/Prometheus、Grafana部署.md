@@ -96,10 +96,10 @@ spec:
 
 等待所有 CRD 资源 变为 Established 状态，确保它们被 Kubernetes 正确注册  
 ```commandline
-kubectl wait \  
-	--for condition=Established \  
+kubectl wait \
+	--for condition=Established \
 	--all CustomResourceDefinition \
-	--namespace=monitoring`  
+	--namespace=monitoring 
 ```
 
 
