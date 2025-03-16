@@ -79,6 +79,6 @@ $ mv grafana.db grafana-old.db
 $ mv grafana-new.db grafana.db
 ```
 **重启grafana的deployment使得更改信息被更新**
-`kubectl rollout restart deployment <deployment-name>`  
+`kubectl rollout restart -n <namespcae-name> deployment <deployment-name>`    
 
 然后就可以删除本地持久存储目录下的grafana-old.db文件
