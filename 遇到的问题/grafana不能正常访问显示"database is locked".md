@@ -8,7 +8,7 @@
 ### 原因：
  由于节点崩溃后Grafana的数据库文件grafana.db出现数据状态不一致导致文件被锁定，导致grafana无法正常访问 SQLite 数据库并无法正常启动
 
-### 解决：
+### 解决：  
 **1.首先查看Grafana的资源配置文件，看其grafana.db文件在哪个位置**  
 以yaml文件信息输出grafana的deployment的配置信息  
 
