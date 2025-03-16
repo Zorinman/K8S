@@ -25,9 +25,9 @@
       - emptyDir: {}
         name: grafana-storage
 ```
-这表明grafana.db是以容器临时存储保存的，该卷挂载在容器内的/var/lib/grafana目录，
-**临时存储的情况下可以试着直接重启deployment看是否能够解决**  
+这表明grafana.db是以容器临时存储保存的，该卷挂载在容器内的/var/lib/grafana目录，  
 
+**临时存储的情况下可以试着直接重启deployment看是否能够解决**  
 `kubectl rollout restart -n <namespcae-name> deployment <deployment-name>`  
 
 **2.将容器内的grafana.db文件拉取到本地并生成新的未被锁定文件**
