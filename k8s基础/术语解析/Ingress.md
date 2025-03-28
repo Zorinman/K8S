@@ -25,7 +25,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: grafana.wolfcode.cn  # 访问 Grafana 域名流量转发到对应服务prometheus-k8s 
+  - host: grafana.zorin.cn  # 访问 Grafana 域名流量转发到对应服务prometheus-k8s 
     http:
       paths:
       - path: /
@@ -35,7 +35,7 @@ spec:
             name: grafana
             port:
               number: 3000
-  - host: prometheus.wolfcode.cn  # 访问 Prometheus 域名流量转发到对应服务prometheus-k8s 
+  - host: prometheus.zorin.cn  # 访问 Prometheus 域名流量转发到对应服务prometheus-k8s 
     http:
       paths:
       - path: /
