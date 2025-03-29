@@ -1,4 +1,4 @@
-［ingress-nginx的使用实例］（https://github.com/Zorinman/K8S/blob/main/%E9%83%A8%E7%BD%B2%E6%96%87%E6%A1%A3/Prometheus%E3%80%81Grafana%E9%83%A8%E7%BD%B2.md）
+[ingress-nginx的使用实例](https://github.com/Zorinman/K8S/blob/main/%E9%83%A8%E7%BD%B2%E6%96%87%E6%A1%A3/Prometheus%E3%80%81Grafana%E9%83%A8%E7%BD%B2.md)
 Ingress是一种抽象概念，而ingress-nginx是其中一种实现
 问：k8s问什么创建service,deployment等资源时可以通过yaml文件直接创建，但是创建ingress资源时需要先安装ingress?
 答：
