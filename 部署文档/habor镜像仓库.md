@@ -65,7 +65,7 @@ $ docker-compose ps
 
  **1.编辑docker配置文件**  
 ` vim /etc/docker/daemon.json`  
-添加以下内容（这里是我自己的harbor主机ip） 注意如果上面有内容 则需要完全另起一行，不在上面内容的[]之内  
+添加以下内容（这里是我自己的harbor主机ip） 注意如果上面有内容 则需要完全另起一行，不在上面内容的[]之内 ,另外上面]后面补一个,  
 ```
 {
   "insecure-registries": ["192.168.219.129"]
