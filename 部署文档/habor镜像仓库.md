@@ -131,5 +131,6 @@ systemctl restart docker`
 正常启动harbor启动：`docker-compose up -d`
 
 未修改配置文件，重启Harbor命令：`docker-compose start | stop | restart`
+如果很久没有启动harbor服务器发现访问不了网站可以重启一下  
 ————————————————
 
