@@ -68,7 +68,7 @@ $ docker-compose ps
 添加以下内容（这里是我自己的harbor主机ip） 注意如果上面有内容 则需要完全另起一行，不在上面内容的[]之内 ,另外上面]后面补一个,  
 ```
 {
-  "insecure-registries": ["192.168.219.129"]
+  "insecure-registries": ["192.168.219.129:80"]
 }
 ```
  **2.重新加载、启动docker**
@@ -81,7 +81,7 @@ systemctl restart docker`
 **接下来就可以开始正式推送镜像**
 
   **3.推送镜像主机的docker连接远程仓库**  
-   `docker login 192.168.219.129`  
+   `docker login 192.168.219.129:80`  
   （如果上述操作后连接时仍然报错可以尝试以下操作（①.②.③分别单独尝试）：  
  ①在 vim /etc/docker/daemon.json 中的ip地址后面加入镜像仓库的端口，如192.168.219.129:80  
  ②在docker login 192.168.219.129时加上端口如docker login 192.168.219.129:80  
