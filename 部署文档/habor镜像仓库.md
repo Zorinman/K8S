@@ -119,7 +119,7 @@ systemctl restart docker`
   ----
 **构建并推送镜像**   
 利用本地的Dockerfile文件构建  
-`docker -t 192.168.219.129/library/REPOSITORY[:TAG] .`  
+`docker build -t 192.168.219.129/library/REPOSITORY[:TAG] .`  
 -t：指定镜像的标签（tag）  
 .:表示使用当前目录下的 Dockerfile 构建镜像
 
