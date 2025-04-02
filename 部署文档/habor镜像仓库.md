@@ -104,15 +104,26 @@ systemctl restart docker`
   ``` 
 ）
 
-  **4.给待推送的镜像打标记，打标记命令格式如下：**  
+  **4.推送已存在镜像与构建并推送镜像**  
+  **推送已存在镜像**  
+  给待推送的镜像打标记，打标记命令格式如下：  
   `docker tag SOURCE_IMAGE[:TAG] 192.168.219.129/library/REPOSITORY[:TAG]`该命令可在harbor仓库查看  
   SOURCE_IMAGE[:TAG]表示当前docker已存在的某个版本的镜像名称  
   library表示的是harbor里头的某个项目名称，表示镜像推送给这个项目  
   REPOSITORY[:TAG]表示的是推送到仓库后你想以什么名称保存,可以随意设置  
   **例：**  
   如果我要推送一个 REPOSITORY 为mysql,TAG为5.7的镜像  
-  则可以为`docker tag mysql:5.7 192.168.219.129/library/This is mysql:5.7`
-    
+  则可以为  
+  `docker tag mysql:5.7 192.168.219.129/library/This is mysql:5.7`
+  
+  ----
+**构建并推送镜像**   
+利用本地的Dockerfile文件构建  
+`docker -t 192.168.219.129/library/REPOSITORY[:TAG] .`  
+-t：指定镜像的标签（tag）  
+.:表示使用当前目录下的 Dockerfile 构建镜像
+
+
  **5.推送完成后断开连接**
  `docker logout`
  
