@@ -96,7 +96,7 @@ systemctl restart docker`
   #编辑配置文件 
   $vim /usr/lib/systemd/system/docker.service
   #找到ExecStart= ，并将以下内容添加到后面
-  --insecure-registry=192.168.219.129
+  --insecure-registry=192.168.219.129:80
   #保存退出
   #重启docker服务
   $systemctl daemon-reload
@@ -106,16 +106,18 @@ systemctl restart docker`
 
   **4.推送已存在镜像与构建并推送镜像**  
   **推送已存在镜像**  
+  ⭐⭐由于之前我们配置的insecure-registrie为`192.168.219.129:80`指定了80端口 所以给镜像打标签和推送命令都必须带上80端口,如果之前insecure-registrie没有指定 则后面也不用指定  
   给待推送的镜像打标记，打标记命令格式如下：  
-  `docker tag SOURCE_IMAGE[:TAG] 192.168.219.129/library/REPOSITORY[:TAG]`该命令可在harbor仓库查看  
+  `docker tag SOURCE_IMAGE[:TAG] 192.168.219.129:80/library/REPOSITORY[:TAG]`该命令可在harbor仓库查看 （**仓库显示的不是带有80端口的**）  
   SOURCE_IMAGE[:TAG]表示当前docker已存在的某个版本的镜像名称  
   library表示的是harbor里头的某个项目名称，表示镜像推送给这个项目  
   REPOSITORY[:TAG]表示的是推送到仓库后你想以什么名称保存,可以随意设置  
   **例：**  
   如果我要推送一个 REPOSITORY 为mysql,TAG为5.7的镜像  
   则可以为  
-  `docker tag mysql:5.7 192.168.219.129/library/This is mysql:5.7`
-  
+  `docker tag mysql:5.7 192.168.219.129:80/library/This is mysql:5.7`
+  `docker push 192.168.219.129:80/library/This is mysql:5.7`  
+ 
   ----
 **构建并推送镜像**   
 利用本地的Dockerfile文件构建  
