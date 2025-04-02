@@ -63,3 +63,4 @@ no_root_squash:
 `mkdir -p /nfs/data/01`  
 `mkdir -p /nfs/data/02`  
 `mount -t nfs 192.168.219.142:/nfs/data /nfs/data`  
+NFS使用实例[PV,PVC的静态和动态构建](https://github.com/Zorinman/K8S/blob/main/%E9%83%A8%E7%BD%B2%E6%96%87%E6%A1%A3/PV%2CPVC%E7%9A%84%E5%8A%A8%E6%80%81%E4%B8%8E%E9%9D%99%E6%80%81%E6%9E%84%E5%BB%BA.md)  
