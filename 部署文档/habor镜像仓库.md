@@ -106,7 +106,8 @@ systemctl restart docker`
 
   **4.推送已存在镜像与构建并推送镜像**  
   **推送已存在镜像**  
-  ⭐⭐由于之前我们配置的insecure-registrie为`192.168.219.129:80`指定了80端口 所以给镜像打标签和推送命令都必须带上80端口,如果之前insecure-registrie没有指定 则后面也不用指定  
+  ⭐⭐由于之前我们配置的insecure-registrie为`192.168.219.129:80`指定了80端口 所以登录docker login和给镜像打标签和推送命令都必须带上80端口,如果之前insecure-registrie没有指定 则后面也不用指定  
+  
   给待推送的镜像打标记，打标记命令格式如下：  
   `docker tag SOURCE_IMAGE[:TAG] 192.168.219.129:80/library/REPOSITORY[:TAG]`该命令可在harbor仓库查看 （**仓库显示的不是带有80端口的**）  
   SOURCE_IMAGE[:TAG]表示当前docker已存在的某个版本的镜像名称  
