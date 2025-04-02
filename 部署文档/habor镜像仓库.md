@@ -131,7 +131,7 @@ systemctl restart docker`
 构建并启动harbor容器：`docker-compose up -d`  
 
 未修改配置文件，操作Harbor命令：`docker-compose start | stop | restart`        
-如果很久没有启动harbor服务器发现访问不了网站可以重启一下  `docker-compose restart`  
+如果很久没有启动harbor服务器发现访问不了网站可以重启一下  `docker-compose restart`   还是不能访问记得检查docker的网卡  
 
 需要对容器进行操作：docker-compose down  docker-compose up -d 用于停止删除和构建启动容器  
 容器正常存在：docker-compose start | stop | restart  用于启动 ，暂停，重启容器  
