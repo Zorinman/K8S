@@ -122,7 +122,7 @@ systemctl restart docker`
 `docker build -t 192.168.219.129/library/REPOSITORY[:TAG] .`  
 -t：指定镜像的标签（tag）  
 .:表示使用当前目录下的 Dockerfile 构建镜像
-
+例子:[jenkins作为基础镜像并在镜像内添加maven和sonar-scanner-cli并构建成新的镜像](https://github.com/Zorinman/linux-docker-k8s/blob/main/docker/%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%93%8D%E4%BD%9C/Dockerfile%E6%9E%84%E5%BB%BA%E9%95%9C%E5%83%8F.md)  
 
  **5.推送完成后断开连接**
  `docker logout`
