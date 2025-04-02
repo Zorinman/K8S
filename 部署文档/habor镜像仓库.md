@@ -116,13 +116,13 @@ systemctl restart docker`
   **例：**  
   如果我要推送一个 REPOSITORY 为mysql,TAG为5.7的镜像  
   则可以为  
-  `docker tag mysql:5.7 192.168.219.129:80/library/This is mysql:5.7`
+  `docker tag mysql:5.7 192.168.219.129:80/library/This is mysql:5.7`  
   `docker push 192.168.219.129:80/library/This is mysql:5.7`  
  
   ----
 **构建并推送镜像**   
 利用本地的Dockerfile文件构建  
-`docker build -t 192.168.219.129/library/REPOSITORY[:TAG] .`  
+`docker build -t 192.168.219.129:80/library/REPOSITORY[:TAG] .`  
 -t：指定镜像的标签（tag）  
 .:表示使用当前目录下的 Dockerfile 构建镜像  
 例子:[jenkins作为基础镜像并在镜像内添加maven和sonar-scanner-cli并构建成新的镜像](https://github.com/Zorinman/linux-docker-k8s/blob/main/docker/%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%93%8D%E4%BD%9C/Dockerfile%E6%9E%84%E5%BB%BA%E9%95%9C%E5%83%8F.md)  
