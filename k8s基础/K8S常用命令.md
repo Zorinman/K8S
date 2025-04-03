@@ -26,9 +26,9 @@
 `kubectl delete svc xx`  
 先删deploy 再删pod 否则pod会自己创建  
 
-**删除一个yaml文件里定义的所有资源**：`kubectl delete  -f    XXX.yaml`  
+**删除一个yaml文件里定义的所有资源（⭐如果使用了PVC持久化存储先删除PV和PVC）**：`kubectl delete  -f    XXX.yaml`  
 
-**删除当前文件夹下面所有yaml文件定义的资源**!  
+**删除当前文件夹下面所有yaml文件定义的资源（⭐如果使用了PVC持久化存储先删除PV和PVC）**!  
 ` pwd查看路径`   
 ` kubectl delete  -f <目录路径>`   
 
@@ -37,11 +37,14 @@
 ![image](https://github.com/user-attachments/assets/5e31a056-978d-432a-b2ec-f9eb1fba7075)
 
 
-如果pod处于Terminating无法删除可以强制删除：  
-强制删除：  
-kubectl delete pod <pod_name> --force --grace-period=0
+如果pod处于Terminating无法删除：    
+⭐可能是使用了持久化存储 先删除对应PV和PVC  
+`kubectl delete pvc <pvc-name>`  
 
-kubectl delete pod mysql-dep-74d9b967f6-rztck --force --grace-period=0
+还是不行则强制删除：  
+`kubectl delete pod <pod_name> --force --grace-period=0`
+
+例：`kubectl delete pod mysql-dep-74d9b967f6-rztck --force --grace-period=0`
 
 ![image](https://github.com/user-attachments/assets/83224734-3255-4bc1-b5cd-af5518d869e3)
 ![image](https://github.com/user-attachments/assets/b95198c5-2c60-4cc4-b614-bc783d88af2a)
