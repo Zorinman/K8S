@@ -1,4 +1,4 @@
-[PV和PVC解释](https://github.com/Zorinman/K8S/blob/main/k8s%E5%9F%BA%E7%A1%80/%E6%9C%AF%E8%AF%AD%E8%A7%A3%E6%9E%90/PV%E5%92%8CPVC.md)  
+[PV和PVC解释](https://github.com/Zorinman/K8S/blob/main/k8s%E5%9F%BA%E7%A1%80/%E7%9F%A5%E8%AF%86%E7%82%B9/PV%E5%92%8CPVC.md)  
 ⭐⭐⭐**以下内容对于namespace（命名空间的要求):**
 # 命名空间关系总结
 
