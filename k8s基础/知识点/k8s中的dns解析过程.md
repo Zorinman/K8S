@@ -12,4 +12,5 @@
 如果Pod 容器内的文件/etc/resolv.conf指向 CoreDNS（如 nameserver 10.96.0.10） 由于pod请求先经过CoreDNS进行处理转发，因此请求不能到达外部无服务器
 
 
-宿主机的DNS配置通常在/etc/sysconfig/network-scripts/ifcfg-ens33，也可在/etc/resolv.conf进行查看（注意是容器外）
+宿主机的DNS配置通常在/etc/sysconfig/network-scripts/ifcfg-ens33，也可在/etc/resolv.conf进行查看（注意是容器外）  
+CoreDNS以pod形式部署在kube-sysytem命名空间  
