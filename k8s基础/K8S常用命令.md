@@ -32,6 +32,9 @@
 ` pwd查看路径`   
 ` kubectl delete  -f <目录路径>`   
 
+**重启对应deployment的pod：**  
+例重启coredns的pod:kubectl rollout restart deployment -n kube-system coredns  
+
 
 
 ![image](https://github.com/user-attachments/assets/5e31a056-978d-432a-b2ec-f9eb1fba7075)
