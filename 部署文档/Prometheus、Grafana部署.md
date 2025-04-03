@@ -1,4 +1,4 @@
-[ingress解释](https://github.com/Zorinman/K8S/blob/main/k8s%E5%9F%BA%E7%A1%80/%E6%9C%AF%E8%AF%AD%E8%A7%A3%E6%9E%90/Ingress.md)  
+[ingress解释](https://github.com/Zorinman/K8S/blob/main/k8s%E5%9F%BA%E7%A1%80/%E7%9F%A5%E8%AF%86%E7%82%B9/Ingress.md)  
 
 **Prometheus、Grafana 和 Alertmanager 的关系**  
 Prometheus 负责监控和数据采集。  
