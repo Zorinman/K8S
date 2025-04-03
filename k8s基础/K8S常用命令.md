@@ -20,7 +20,20 @@
 
 **如果不指定容器-c 则表示直接在pod的默认容器执行**：`kubectl exec -it <pod-name> -- <command>`
 
-![image](https://github.com/user-attachments/assets/6b731fee-a13c-457b-bc52-cf70caef575b)  
+**删除Pod service depoly**  
+`kubectl delete deploy XX`  
+`kubectl delete pod   XX`  
+`kubectl delete svc xx`  
+先删deploy 再删pod 否则pod会自己创建  
+
+**删除一个yaml文件里定义的所有资源**：`kubectl delete  -f    XXX.yaml`  
+
+**删除当前文件夹下面所有yaml文件定义的资源**!  
+` pwd查看路径`   
+` kubectl delete  -f <目录路径>`   
+
+
+
 ![image](https://github.com/user-attachments/assets/5e31a056-978d-432a-b2ec-f9eb1fba7075)
 
 
