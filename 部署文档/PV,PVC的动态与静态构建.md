@@ -69,12 +69,12 @@ spec:
             - name: NFS_SERVER
               value: 192.168.219.142   #环境变量：NFS服务器地址
             - name: NFS_PATH
-              value: /nfs/data/01      #环境变量：NFS共享目录地址
+              value: /nfs/data     #环境变量：NFS共享目录地址(可以进一步指定）
       volumes:
         - name: nfs-client-root
           nfs:
             server: 192.168.219.142     #NFS服务器地址
-            path: /nfs/data/01          #NFS共享目录地址
+            path: /nfs/data         #NFS共享目录地址(可以进一步指定）
 ```
 
 **StroageClass模板**：
