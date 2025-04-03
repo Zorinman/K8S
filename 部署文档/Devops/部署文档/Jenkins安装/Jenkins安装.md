@@ -9,7 +9,7 @@
 ## 二、如果k8s的容器运行时是containerd 则需要为containerd配置以便于k8s从harbor仓库拉取镜像     
 
 (类似于在为docker在/etc/daemon.json中配置"insecure-registries": ["192.168.219.129:80"]  
-
+`vim /etc/containerd/config.toml`  
 ```yaml
 [plugins."io.containerd.grpc.v1.cri".registry]
   config_path = ""  # 保留空字符串（或删除此行）
