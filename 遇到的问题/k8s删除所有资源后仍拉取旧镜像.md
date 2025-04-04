@@ -36,3 +36,6 @@ containers:
   - name: jenkins
     image: 192.168.219.129:80/library/jenkins-maven:v1
     imagePullPolicy: Always
+```
+
+⭐成功拉取之后 记得kubectl edit deploymen  把imagePullPolicy改为IfNotPresent，否则每次都会尝试自动从镜像地址拉取镜像.  
