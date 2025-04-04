@@ -34,4 +34,4 @@
 查看容器日志，搜索关键词password获取默认登录密码    
 `kubectl logs -f <podname> -n kube-devops`
 这里我的是53968408369d4fc99bd7c7c1a7d8adb1   
-登录之后我将 用户名和密码改为了 zorin 和123  
+登录之后我将 用户名和密码改为了 admin 和123  
