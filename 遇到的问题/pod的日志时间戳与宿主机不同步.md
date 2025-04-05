@@ -22,4 +22,4 @@ hostPath:
 path: /usr/share/zoneinfo/Asia/Shanghai # 宿主机的目录
 ```
 
-
+更新yaml  `kubeclt apply -f xxx.yaml` 
