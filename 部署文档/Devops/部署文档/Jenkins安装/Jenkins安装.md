@@ -26,6 +26,8 @@
   [plugins."io.containerd.grpc.v1.cri".registry.auths]
   [plugins."io.containerd.grpc.v1.cri".registry.headers]
 ```
+重启containerd `systemctl restart containerd` 
+
 这里jenkins-pvc使用的是之前配置好的nfs制备器自动创建PV  
 安装  
 `kubectl apply -f . `
