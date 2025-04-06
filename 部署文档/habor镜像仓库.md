@@ -149,7 +149,7 @@ systemctl restart docker`
 需要对容器进行操作：docker-compose down  docker-compose up -d 用于停止删除和构建启动容器  
 容器正常存在：docker-compose start | stop | restart  用于启动 ，暂停，重启容器  
 ————————————————
-如果一切容器正常运行但是访问不了网站可以重启一下docker再重启所有组件（目前不清楚原因）  
+如果一切容器正常运行但是访问不了网站可以重启一下docker再重启所有组件（目前不清楚原因，可能是开了梯子，记得重启前先把梯子关了）  
 ` systemctl restart docker`   
  `docker-compose restart`   
 
