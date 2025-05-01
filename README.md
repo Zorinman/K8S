@@ -1,7 +1,6 @@
 github文件和文件夹的基础操作https://docs.github.com/zh/repositories/working-with-files/managing-files/moving-a-file-to-a-new-location
 # K8S
-这是一个k8s的学习笔记   
-这是一个个人的K8S学习笔记也是我的第一次尝试在github上记录笔记  
+这是一个k8s的学习笔记    
 
 ## 写笔记的基础知识：
 采用md文件来记录笔记，采用的是**markdown**语法因此直接在github上写不是很方便  
