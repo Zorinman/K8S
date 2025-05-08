@@ -3,10 +3,11 @@
 Ingress 提供从集群外部到集群内服务的 HTTP 和 HTTPS 路由，流量Ingress-controller根据Ingress的yaml 资源所定义的路由规则来找到对应集群内的服务  
 
 Ingress的安装指的是前者，而 Ingress的yaml 资源通常根据对应的服务来创建，且**Ingress资源必须跟要关联的服务在同一命名空间下**  
-**部署的Ingress**  
+
+**1安装部署的Ingress**  
 ![image](https://github.com/user-attachments/assets/f1ed0c61-3606-4b07-9887-35c2546232f3)  
 
-**为对应服务定义的Ingress资源作为路由规则**  
+**2为对应服务定义的Ingress资源作为路由规则**  
 ![image](https://github.com/user-attachments/assets/d9678c5d-18bb-40da-af63-47a258f05e3a)  
 
 -----
