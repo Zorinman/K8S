@@ -13,10 +13,9 @@ git status
 git add
 git commit
 ```
-图片直接在github的编辑中拖拽上来就行
+
   
-**以上内容均在pycharm中完成**
-![IMG_0685 PNG](https://github.com/user-attachments/assets/c6563b81-b756-432a-858d-7f385aad23a5)
+
 
 
 
