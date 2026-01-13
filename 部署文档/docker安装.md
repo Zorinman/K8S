@@ -20,3 +20,10 @@
 
 ## 4.检测是否安装docker成功：
 `docker -v` 查看docker版本
+
+
+## debian 13 安装docker
+建议直接使用官方脚本方式安装docker，[参考链接](https://docs.docker.com/engine/install/debian/#install-using-the-convenience-script)
+**注意必须要先搭clash梯子，不然则不能官方方式，需要换源**
+
+[换源安装参考](https://comate.baidu.com/zh/page/70jl2t2gc3s)
