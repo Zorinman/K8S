@@ -59,7 +59,9 @@ sudo apt upgrade
 
 # K8s v1.34 安装
 > ⭐以下所有加速镜像源配置不管是否有全局代理都必须要依照教程配置，否则k8s组件无法安装成功
-
+## 部署参考文档
+[文档1](https://blog.csdn.net/2401_88544663/article/details/153278515)
+[文档2](https://blog.csdn.net/qq_67627366/article/details/150426212)
 ## 基础配置：
 ### 1.配置静态ip(参考github仓库中的Debain 13配置静态IP文档)、
 
