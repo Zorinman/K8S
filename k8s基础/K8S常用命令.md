@@ -87,7 +87,7 @@ bash 是 Bourne-Again Shell 的缩写，是 sh 的增强版。
 | **查看所有pod节点**                            | `kubectl get pods -A`                          |
 | **查看pod节点详情**                            | `kubectl get pod -o wide`                      |
 | **查看所有名称空间下的pod**                    | `kubectl get pod --all-namespaces`             |
-| **查看异常的pod节点**                          | `kubectl get pods -n <名称空间>                | grep -v Running` |
+| **查看异常的pod节点**                          | `kubectl get pods -n <名称空间>`               | grep -v Running` |
 | **查看异常pod节点的日志**                      | `kubectl describe pod <pod名称> -n <名称空间>` |
 | **实时查看Pod的默认容器的日志**                | `kubectl logs -f <pod名称>`                    |
 | **如果 Pod 中有多个容器，查看指定容器日志**    | `kubectl logs -f <pod名称> -c <容器名称>`      |
