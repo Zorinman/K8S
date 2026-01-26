@@ -1,6 +1,6 @@
 https://blog.csdn.net/gitblog_00811/article/details/154934399
 https://kserve.github.io/website/docs/intro
-**DEMO ：**
+**AI Model deploy DEMO ：**
 [Guideline](https://devopscube.com/deploy-ml-model-kubernetes-kserve/)  
 [Github Repo](https://github.com/devopscube/predictor-model)
 # 架构图
@@ -225,3 +225,287 @@ helm install kserve oci://ghcr.io/kserve/charts/kserve --version v0.15.0 \
 ```bash
 kubectl get pods -n kserve
 ```
+
+
+
+# 在路径A部署下的kserve中部署一个AI Model
+
+## 使用 KServe 部署 ML 模型示例
+
+本指南中使用的所有文件和模型均来自示例 GitHub 仓库。
+
+请运行以下命令克隆代码库：
+
+```bash
+git clone https://github.com/devopscube/predictor-model.git
+```
+
+克隆完成后，目录结构如下所示：
+
+```text
+predictor-model
+    ├── Dockerfile
+    ├── README.md
+    ├── inference.yaml
+    ├── job.yaml
+    └── model
+        └── model.pkl
+```
+
+- **Dockerfile** - 用于将模型容器化。
+- **inference.yaml** - 用于在 Kubernetes 上创建 KServe 推理服务的资源清单文件。
+- **job.yaml** - 用于创建 PVC 并将模型复制到 PVC 中的 Job 的清单文件。
+
+进入 `predictor-model` 目录并继续后续步骤：
+
+```bash
+cd predictor-model
+```
+
+### 步骤 1：容器化模型（可选）
+
+以下是用于容器化模型的 Dockerfile。
+
+```Dockerfile
+FROM alpine:latest
+WORKDIR /app
+COPY model/ ./model/
+```
+
+**Dockerfile 说明：**
+- 使用 `alpine:latest` 作为基础镜像。
+- 设置 `/app` 为工作目录，并将模型文件复制到该目录下。
+
+执行以下命令构建镜像：
+
+```bash
+docker build -t devopscube/predictor-model:1.0 .
+```
+
+构建完成后，将镜像推送到仓库（推送到dockerhub-非必须）：
+
+```bash
+docker push devopscube/predictor-model:1.0
+```
+
+### 步骤 2：将容器中模型持久化存储到 PV
+
+我们需要创建一个 PV，PVC 和一个 Job，用于将Docker 镜像内部的模型文件复制到持久卷（PV）所在路径下即`宿主机的 /home/zorin/predictor-model 目录`。
+
+该配置会创建 PV,PVC 以及使用Job启动一个将模型复制到 PV 的临时容器。Job 完成后，Pod 将在 10 秒后自动删除。
+
+以下是包含 PV，PVC 和 Job 定义的 **job.yaml** 文件（原job.yaml没有）：
+
+```yaml
+# ==========================================
+# 第一部分：PersistentVolume (PV)
+# 定义集群层面的“物理存储资源”
+# ==========================================
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: predictor-model-pv       # PV 的名称
+  labels:
+    type: local
+spec:
+  # 存储类名称：这是 PV 和 PVC 绑定的“暗号”，必须完全一致
+  storageClassName: manual       
+  capacity:
+    storage: 5Gi                 # 声明该卷的容量大小
+  accessModes:
+    - ReadWriteOnce              # 访问模式：可以被单个节点以读写模式挂载
+  hostPath:
+    # 宿主机路径：这是数据最终落在物理机磁盘上的位置
+    # 容器里的数据会被写入到这个目录中
+    path: "/home/zorin/predictor-model" 
+
+---
+# ==========================================
+# 第二部分：PersistentVolumeClaim (PVC)
+# 定义用户层面的“存储申请书”
+# ==========================================
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: predictor-model-pvc      # PVC 名称，Pod 会引用这个名字
+spec:
+  # 必须与上面的 PV 保持一致，否则无法绑定
+  storageClassName: manual       
+  accessModes:
+    - ReadWriteOnce              # 必须与 PV 兼容
+  resources:
+    requests:
+      storage: 5Gi               # 申请的大小，不能超过 PV 的容量
+
+---
+# ==========================================
+# 第三部分：Job
+# 定义一个一次性任务，启动临时容器用于执行数据复制
+# ==========================================
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: predictor-model-copy-job
+spec:
+  # 任务完成后 10 秒自动删除 Job 记录（保留日志方便查看，但清理元数据）
+  ttlSecondsAfterFinished: 10    
+  backoffLimit: 1                # 如果失败，最多重试 1 次
+  template:
+    spec:
+      restartPolicy: OnFailure   # 容器退出代码不为 0 时重启
+      containers:
+      - name: model-writer
+        image: devopscube/predictor-model:1.0
+        command: [ "/bin/sh", "-c" ]
+        # 下面是具体的执行脚本
+        args:
+        - |
+          echo ">>> Copying model to PVC..."
+          # 核心操作：将镜像内 /app/model 的数据复制到挂载点
+          # /mnt/models 对应的是宿主机的 /home/zorin/predictor-model
+          cp -r /app/model/* /mnt/models/
+          echo ">>> Verifying contents in PVC..."
+          ls -lh /mnt/models
+          echo ">>> Verification complete. Job finished."
+        
+        # 容器内部挂载配置
+        volumeMounts:
+        - name: model-storage    # 引用下面 volumes 定义的名字
+          mountPath: /mnt/models # 容器内部的路径（虚拟路径）
+
+      # Pod 存储卷配置
+      volumes:
+      - name: model-storage      # 给卷起个名，供 volumeMounts 使用
+        persistentVolumeClaim:
+          claimName: predictor-model-pvc # 引用上面定义的 PVC
+```
+
+
+
+应用该配置：
+
+```bash
+kubectl apply -f job.yaml
+```
+
+查看 Job Pod 的日志，预期输出如下：
+
+```bash
+$ kubectl logs job/predictor-model-copy-job
+
+>>> Copying model to PVC...
+>>> Verifying contents in PVC...
+total 4K     
+-rw-r--r--    1 root     root        1.7K Sep 16 06:57 model.pkl
+>>> Verification complete. Job finished.
+```
+
+### 步骤 3：部署 InferenceService 资源
+
+我们将应用 **inference.yaml** 文件来在集群上创建 KServe 的推理服务资源。
+
+```yaml
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: model
+spec:
+  predictor:
+    sklearn:
+      storageUri: pvc://predictor-model-pvc
+      resources:
+        requests:
+          cpu: 500m
+          memory: 1Gi
+```
+
+**配置详解：**
+- `spec.predictor`：定义模型的服务方式。
+- `sklearn`：指定使用 scikit-learn 框架。
+- `storageUri: pvc://predictor-model-pvc`：指定模型文件存储在名为 "predictor-model-pvc" 的 PVC 中。
+
+应用推理服务配置：
+
+```bash
+kubectl apply -f inference.yaml
+```
+
+检查相关对象是否成功创建：
+
+```bash
+kubectl get po,svc,hpa,inferenceservice
+```
+
+您将看到类似以下的输出：
+
+![验证对象创建情况](./imgs/image_2.png)
+
+内部访问端点为：
+
+```bash
+http://model-predictor.default.svc.cluster.local/v1/models/model:predict
+```
+
+**端点结构解析：**
+`http://<host>:<port>/v1/models/<model_name>:predict`
+
+- **固定部分 (Fixed)**: 
+  - `v1/models/`: KServe/TensorFlow Serving 的标准 API 路径前缀。
+  - `:predict`: 标准动作后缀，表示执行推理请求。
+- **自定义部分 (Custom)**: 
+  - **model-predictor.default.svc.cluster.local**: (Host部分) Kubernetes 集群内完整的 Service DNS 名称，由 KServe 自动生成。
+  - **model**: (Path部分) 这是您在 `InferenceService` YAML 的 `metadata.name` 中定义的**模型名称**。如果您将 YAML 中的 name 改为 `my-classifier`，这里就变成 `/v1/models/my-classifier:predict`。
+
+
+## 测试 KServe 推理端点
+
+为了测试模型，我们将使用开发者的本地调试神器`端口转发（Port-Forward）`暴露服务，并使用 `curl` 发送请求。
+`Port-Forward`本质上是通过`API Server`建立隧道，绝对不要用于生产环境
+> **Kserve的对外Service服务原理解析**：
+> 1.  **来源**：这里的 `service/model-predictor` 并非由您手动定义的 YAML 文件创建，而是 **KServe Controller** 根据 `InferenceService` 的名称（本例中为 `model`）自动生成的。
+> 2.  **本质**：它**就是**一个标准的、原生的 **Kubernetes Service**（ClusterIP 类型）。您完全可以使用 `kubectl get service` 查看到它，也可以像操作普通 Service 一样操作它（如 Port-Forward）。KServe 只是充当了“运维人员”的角色，帮您自动维护了这个原生资源。
+> 3.  **命名**：其命名规则通常为 `<InferenceService名称>-predictor`。
+
+执行端口转发：
+
+**本地访问（VM内）：**
+```bash
+kubectl port-forward service/model-predictor 8000:80
+```
+
+**远程访问（从宿主机）：**
+> 如果需要在**宿主机（Host）**访问虚拟机的服务，请添加 `--address 0.0.0.0` 参数以监听所有网络接口。
+
+```bash
+kubectl port-forward --address 0.0.0.0 service/model-predictor 8000:80
+```
+*此时，您可以在宿主机使用bash以及地址替换为 `http://<虚拟机IP>:8000/v1/models/model:predict` 在宿主机上访问服务。*
+
+
+**发送预测请求（VM内）**：
+
+```bash
+curl -X POST \
+     -H "Content-Type: application/json" \
+     -d '{
+           "instances": [
+             "sparrow",
+             "elephant",
+             "sunflower"
+           ]
+         }' \
+     "http://localhost:8000/v1/models/model:predict"
+```
+
+预期输出结果如下：
+
+![检查 curl 请求的输出](./imgs/image_3.png)
+
+**结果说明：**
+- `0`：动物 (Animal)
+- `1`：鸟类 (Bird)
+- `2`：植物 (Plant)
+
+输出结果与输入相符，模型部署成功！
+
+ 
